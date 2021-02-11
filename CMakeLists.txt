@@ -16,7 +16,7 @@
 
 cmake_minimum_required(VERSION 3.7)
 
-project(kdsoap-ws-discovery-client VERSION 0.1)
+project(kdsoap-ws-discovery-client VERSION 0.2)
 
 include(FeatureSummary)
 find_package(ECM 5.54.0  NO_MODULE)
@@ -32,7 +32,7 @@ include(KDECMakeSettings)
 include(GenerateExportHeader)
 
 set(REQUIRED_QT_VERSION 5.9.0)
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Network Test Xml)
+find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Network Xml)
 
 find_package(KDSoap 1.9.0 REQUIRED)
 set_package_properties(KDSoap PROPERTIES
@@ -41,6 +41,10 @@ set_package_properties(KDSoap PROPERTIES
     TYPE REQUIRED
     PURPOSE "Support for SOAP client protocol"
 )
+
+if (BUILD_TESTING)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Test)
+endif()
 
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
